@@ -14,7 +14,7 @@ const Users = Bookshelf.Model.extend({
 });
 
 /* GET home page. */
-router.get("/", function (req, res, next) {
+router.get("/", function (req, res) {
   if (req.session.login) return res.redirect("/");
   res.render("login", { title: "Time Clock Center" });
 });
