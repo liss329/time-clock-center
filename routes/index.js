@@ -7,4 +7,9 @@ router.get("/", function (req, res) {
   res.render("index", { title: "Time Clock Center" });
 });
 
+router.get("/logout", (req, res) => {
+  req.session.login = null;
+  res.redirect("/login");
+});
+
 module.exports = router;
