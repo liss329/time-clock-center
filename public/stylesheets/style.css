@@ -5,6 +5,8 @@ html {
 }
 
 body {
+  font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans", "Noto Sans", Meiryo, sans-serif;
   background-color: #f2f2f2;
 }
 
@@ -38,4 +40,36 @@ header {
 
 .logout a:focus{
   background-color: #53b14a;
+}
+
+.current-time {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.main-function {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  text-align: center;
+}
+
+.main-function a {
+  text-decoration: none;
+  width: 300px;
+  height: 80px;
+  line-height: 80px;
+  font-size: 125%;
+  color: black;
+  background-color: #bebebe;
+  border-bottom: solid 4px #627295;
+  border-radius: 10px;
+  margin: 40px 0px 40px 0px;
+}
+
+.main-function a:active {
+  -webkit-transform: translateY(4px);
+  transform: translateY(4px);
+  border-bottom: none;
+  padding-bottom: 4px;
 }
