@@ -73,3 +73,19 @@ header {
   border-bottom: none;
   padding-bottom: 4px;
 }
+
+/* 勤怠管理ページ */
+table {
+  border-collapse: collapse;
+  /* display: flex;
+  justify-content: center; */
+}
+
+table thead {
+  background: #d3edeb;
+}
+table th,
+table td {
+  border: 1px solid #ccc;
+  padding: 10px 20px 10px 20px;
+}

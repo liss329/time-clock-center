@@ -10,5 +10,71 @@
 <body>
   <%- include("components/header") %>
   勤怠管理画面
+  <%
+    const nextPageMonth = month !== 12 ? month + 1 : 1;
+    const nextPageYear = month !== 12 ? year : year + 1;
+    const prevPageMonth = month !== 1 ? month - 1 : 12;
+    const prevPageYear = month !== 1 ? year : year - 1;
+  %>
+
+  <form action="/attendanceRecord" method="get">
+    <input type="hidden" name="month" value="<%= prevPageYear %>-<%= prevPageMonth %>">
+    <button type="submit" value="">＜</button>
+  </form>
+  <form action="">
+    <input type="hidden" name="month" value="<%= nextPageYear %>-<%= nextPageMonth %>">
+    <button type="submit" value="">＞</button>
+  </form>
+
+  <% const days = [
+        "日",
+        "月",
+        "火",
+        "水",
+        "木",
+        "金",
+        "土",
+      ];
+     const nowMonthFirst = new Date(year, month, 1).getDay(); // 月初
+  %>
+  <table>
+    <thead>
+      <tr>
+        <th>日付</th>
+        <th>承認</th>
+        <th>出勤</th>
+        <th>退勤</th>
+        <th>休憩</th>
+        <th>所定</th>
+        <th>所定外</th>
+        <th>残業</th>
+        <th>深夜</th>
+        <th>遅刻</th>
+        <th>早退</th>
+        <th>労働合計</th>
+        <th>備考</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(let i = 0; lastDay > i; i++){ %>
+      <tr>
+        <th><%= month %>/<%= i + 1 %>(<%= days[(nowMonthFirst + i) % 7] %>)</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
 </body>
+
 </html>
