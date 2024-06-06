@@ -9,12 +9,16 @@ router.get("/", (req, res) => {
     return new Date(year, month, 0).getDate();
   };
 
-  const year = req.query.month
-    ? req.query.month.split("-")[0]
-    : new Date().getFullYear();
-  const month = req.query.month
-    ? req.query.month.split("-")[1]
-    : new Date().getMonth() + 1;
+  const year = req.query.date
+    ? req.query.date.split("-")[0]
+    : req.query.year
+      ? req.query.year
+      : new Date().getFullYear();
+  const month = req.query.date
+    ? req.query.date.split("-")[1]
+    : req.query.month
+      ? req.query.month
+      : new Date().getMonth() + 1;
 
   res.render("attendanceRecord", {
     title: "勤怠管理 | Time Clock Center",

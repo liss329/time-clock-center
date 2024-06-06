@@ -4,7 +4,6 @@
 <head>
   <title><%= title %></title>
   <link href="/public/stylesheets/style.css" rel="stylesheet">
-
 </head>
 
 <body>
@@ -16,15 +15,36 @@
     const prevPageMonth = month !== 1 ? month - 1 : 12;
     const prevPageYear = month !== 1 ? year : year - 1;
   %>
+  <div class="selectDate">
+    <form class="selectDate-prev" action="/attendanceRecord" method="get">
+      <input type="hidden" name="date" value="<%= prevPageYear %>-<%= prevPageMonth %>">
+      <button type="submit" value="">＜</button>
+    </form>
+    <form class="selectDate-select" action="/attendanceRecord" method="get">
+      <select class="selectDate-select-year" name="year">
+        <option value="<%= year %>"><%= year %></option>
+        <% for(let i = 1; i < 10; i++){ %>
+          <% if(year !== new Date().getFullYear() - i ){ %>
+            <option value="<%= new Date().getFullYear() - i %>"><%= new Date().getFullYear() - i %></option>
+          <% } %>
+        <% } %>
+      </select>
+      <select class="selectDate-select-month" name="month">
+        <option value="<%= month %>"><%= month %></option>
+        <% for(let i = 1; 12 >= i; i++){ %>
+          <% if(i !== month){  %>
+            <option value=<%= i %>><%= i %></option>
+          <% } %>
+        <% } %>
+      </select>
+      <button type="submit">更新</button>
+    </form>
+    <form class="selectDate-next" action="">
+      <input type="hidden" name="date" value="<%= nextPageYear %>-<%= nextPageMonth %>">
+      <button type="submit" value="">＞</button>
+    </form>
+  </div>
 
-  <form action="/attendanceRecord" method="get">
-    <input type="hidden" name="month" value="<%= prevPageYear %>-<%= prevPageMonth %>">
-    <button type="submit" value="">＜</button>
-  </form>
-  <form action="">
-    <input type="hidden" name="month" value="<%= nextPageYear %>-<%= nextPageMonth %>">
-    <button type="submit" value="">＞</button>
-  </form>
 
   <% const days = [
         "日",

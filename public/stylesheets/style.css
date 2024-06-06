@@ -75,6 +75,16 @@ header {
 }
 
 /* 勤怠管理ページ */
+.selectDate {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0px;
+}
+
+.selectDate-prev, .selectDate-next{
+  margin: 0px 10px;
+}
+
 table {
   border-collapse: collapse;
   /* display: flex;
