@@ -57,44 +57,64 @@
       ];
      const nowMonthFirst = new Date(year, month, 1).getDay(); // 月初
   %>
-  <table>
-    <thead>
-      <tr>
-        <th>日付</th>
-        <th>承認</th>
-        <th>出勤</th>
-        <th>退勤</th>
-        <th>休憩</th>
-        <th>所定</th>
-        <th>所定外</th>
-        <th>残業</th>
-        <th>深夜</th>
-        <th>遅刻</th>
-        <th>早退</th>
-        <th>労働合計</th>
-        <th>備考</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% for(let i = 0; lastDay > i; i++){ %>
-      <tr>
-        <th><%= month %>/<%= i + 1 %>(<%= days[(nowMonthFirst + i) % 7] %>)</th>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <% } %>
-    </tbody>
-  </table>
+
+  <section class="attendanceTable">
+    <table>
+      <thead>
+        <tr>
+          <th>日付</th>
+          <th>承認</th>
+          <th>出勤</th>
+          <th>退勤</th>
+          <th>休憩</th>
+          <th>所定</th>
+          <th>所定外</th>
+          <th>残業</th>
+          <th>深夜</th>
+          <th>遅刻</th>
+          <th>早退</th>
+          <th>労働合計</th>
+          <th>備考</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for(let i = 0; lastDay > i; i++){ %>
+          <% const date = i + 1 %>
+          <% let clock_in %>
+          <% let clock_out %>
+          <% for(let j = 0; attendanceDate.length > j; j++){ %>
+            <% if(attendanceDate[j].attributes.date === date){ %>
+              <% clock_in = attendanceDate[j].attributes.clock_in %>
+              <% clock_out = attendanceDate[j].attributes.clock_out %>
+            <% } %>
+          <% } %>
+          <tr>
+            <th><%= month %>/<%= date %>(<%= days[(nowMonthFirst + i) % 7] %>)</th>
+            <td></td>
+            <td>
+              <% if(clock_in){ %>
+              <p><%= clock_in %></p>
+              <% } %>
+            </td>
+            <td>
+              <% if(clock_out){ %>
+              <p><%= clock_out %></p>
+              <% } %>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </section>
 </body>
 
 </html>

@@ -1,6 +1,19 @@
 const express = require("express");
 const router = express.Router();
 
+const knex = require("knex")({
+  client: "sqlite3",
+  connection: {
+    filename: "user_data.sqlite3",
+  },
+  useNullAsDefault: true,
+});
+const Bookshelf = require("bookshelf")(knex);
+
+const Attendance = Bookshelf.Model.extend({
+  tableName: "attendance",
+});
+
 router.get("/", (req, res) => {
   if (!req.session.login) return res.redirect("/login");
 
@@ -20,12 +33,20 @@ router.get("/", (req, res) => {
       ? req.query.month
       : new Date().getMonth() + 1;
 
-  res.render("attendanceRecord", {
-    title: "勤怠管理 | Time Clock Center",
-    year: Number(year),
-    month: Number(month),
-    lastDay: getLastDay(year, month),
-  });
+  Attendance.where("uid", "=", req.session.login.uid)
+    .where("year", "=", year)
+    .where("month", "=", month)
+    .orderBy("date", "ABC")
+    .fetchAll()
+    .then((collection) => {
+      res.render("attendanceRecord", {
+        title: "勤怠管理 | Time Clock Center",
+        year: Number(year),
+        month: Number(month),
+        attendanceDate: collection.models, // array-like object
+        lastDay: getLastDay(year, month),
+      });
+    });
 });
 
 module.exports = router;
