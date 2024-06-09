@@ -20,9 +20,8 @@ router.get("/", function (req, res) {
 });
 
 router.post("/", (req, res) => {
-  console.log(`email:${req.body.email}, password:${req.body.password}`);
   Users.query({
-    where: { email: req.body.email },
+    where: { login_id: req.body.login_id },
     andWhere: { password: req.body.password },
   })
     .fetch()
