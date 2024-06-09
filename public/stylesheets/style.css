@@ -85,10 +85,14 @@ header {
   margin: 0px 10px;
 }
 
+.attendanceTable {
+  display: flex;
+  justify-content: center;
+}
+
 table {
   border-collapse: collapse;
-  /* display: flex;
-  justify-content: center; */
+  width: 95%;
 }
 
 table thead {
@@ -98,4 +102,5 @@ table th,
 table td {
   border: 1px solid #ccc;
   padding: 10px 20px 10px 20px;
+  text-align: center;
 }
